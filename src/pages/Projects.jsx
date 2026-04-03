@@ -53,14 +53,14 @@ const PROJECTS = [
     live: 'https://sites.google.com/view/cybercafedeals/home?authuser=0',
     code: '#'
   },
-  {
-    title: '📊 ProfileX – Data Profiler',
-    desc: 'Smart data profiling and preprocessing web app for CSV datasets — feature summary, missing value handling, and visualization.',
-    ss: '/ProfileX.png',
-    tech: ['Streamlit', 'Pandas', 'Plotly'],
-    live: 'https://profilex.streamlit.app/',
-    code: 'https://github.com/kunjdesai/ProfileX'
-  },
+{
+  title: '📊 Datapulse',
+  desc: 'Built a mini Power BI-style dashboard using HTML, CSS, and JavaScript for interactive data visualization with charts, KPI cards, and dataset preview',
+  ss: '/ProfileX.png',
+  tech: ['Power BI', 'Data Visualization', 'HTML', 'CSS', 'JavaScript'],
+  live: 'https://69babc8d5997989746045b14--velvety-kataifi-9441c2.netlify.app/',
+  code: 'https://github.com/kunjdesai/ProfileX'
+}
   
 ]
 

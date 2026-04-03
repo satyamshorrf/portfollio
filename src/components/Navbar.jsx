@@ -5,13 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 const links = [
   { label: "Home", to: "/" },
   { label: "Projects", to: "/projects" },
-  { label: "Gallery", to: "/gallery" },
   { label: "Skills", to: "/skills" },
   { label: "Certificates", to: "/certificates" },
-  { label: "Blog", to: "/blog" },
   { label: "Resume", to: "/resume" },
   { label: "About Me", to: "/about" },
-  { label: "Contact", to: "/contact" },
+  { label: "Gallery", to: "/gallery" },
 ];
 
 export default function Navbar() {
@@ -23,7 +21,9 @@ export default function Navbar() {
   // Check if links overflow nav width (to show hamburger)
   const checkOverflow = () => {
     if (!navRef.current || !linksRef.current) return;
-    setShowButton(linksRef.current.scrollWidth > navRef.current.offsetWidth);
+    setShowButton(
+      linksRef.current.scrollWidth > navRef.current.offsetWidth
+    );
   };
 
   useEffect(() => {
@@ -42,19 +42,16 @@ export default function Navbar() {
           top: 0,
           zIndex: 100,
           display: "flex",
-          justifyContent: "space-between",
           alignItems: "center",
           padding: "1rem 2rem",
           borderBottom: "1px solid rgba(255,255,255,0.1)",
           background: "rgba(0,0,0,0.6)",
           backdropFilter: "blur(10px)",
-          fontFamily: "inherit",
         }}
       >
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <motion.div
-            className="logo"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 200 }}
@@ -66,7 +63,8 @@ export default function Navbar() {
           >
             PV
           </motion.div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+
+          <div>
             <h1 style={{ margin: 0, fontSize: 14 }}>Pratik Verma</h1>
             <div style={{ fontSize: 12, color: "var(--muted)" }}>
               Ai Automation • Researcher • Developer
@@ -74,15 +72,14 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Desktop links */}
+        {/* Desktop Links (RIGHT SIDE FIXED) */}
         <div
           ref={linksRef}
           style={{
             display: showButton ? "none" : "flex",
-            justifyContent: "center",
             gap: "2rem",
             alignItems: "center",
-            flexGrow: 1,
+            marginLeft: "auto", // ✅ pushes to right
           }}
         >
           {links.map((l) => (
@@ -91,10 +88,9 @@ export default function Navbar() {
               to={l.to}
               end
               style={{
-                position: "relative",
-                fontSize: "0.95rem",
                 textDecoration: "none",
                 color: "white",
+                fontSize: "0.95rem",
                 fontWeight: 500,
               }}
             >
@@ -113,11 +109,14 @@ export default function Navbar() {
                   }}
                 >
                   <motion.span
-                    animate={{ color: isActive ? "var(--accent)" : "white" }}
+                    animate={{
+                      color: isActive ? "var(--accent)" : "white",
+                    }}
                     transition={{ duration: 0.3 }}
                   >
                     {l.label}
                   </motion.span>
+
                   {isActive && (
                     <motion.div
                       layoutId="underline"
@@ -140,27 +139,25 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Hamburger */}
+        {/* Hamburger (Mobile) */}
         {showButton && (
-          <div className="mobile-btn">
-            <button
-              style={{
-                background: "none",
-                border: "none",
-                color: "#fff",
-                fontSize: "1.8rem",
-                cursor: "pointer",
-                zIndex: 10000,
-              }}
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? "✕" : "☰"}
-            </button>
-          </div>
+          <button
+            style={{
+              marginLeft: "auto",
+              background: "none",
+              border: "none",
+              color: "#fff",
+              fontSize: "1.8rem",
+              cursor: "pointer",
+            }}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? "✕" : "☰"}
+          </button>
         )}
       </nav>
 
-      {/* --- Mobile Dropdown Menu --- */}
+      {/* --- Mobile Menu --- */}
       <AnimatePresence>
         {isOpen && showButton && (
           <motion.div
@@ -179,7 +176,6 @@ export default function Navbar() {
               flexDirection: "column",
               alignItems: "center",
               paddingTop: "4rem",
-              overflowY: "auto",
               zIndex: 9999,
             }}
           >
